@@ -23,16 +23,16 @@ public class Seller {
     private Long id;
 
     @Column(nullable = false, unique = true)
-    private String seller_id;
+    private String sellerId;
 
     @Column(nullable = false)
-    private String seller_password;
+    private String sellerPassword;
 
     @Column
-    private String brand_name;
+    private String brandName;
 
     @Column
-    private String seller_contact;
+    private String sellerContact;
 
     @CreatedDate
     private LocalDateTime createdAt;
@@ -43,10 +43,10 @@ public class Seller {
     public static Seller toSeller(SellerDTO sellerDTO){
         Seller seller = new Seller();
 
-        seller.setSeller_id(sellerDTO.getSeller_id());
-        seller.setSeller_password(sellerDTO.getSeller_password());
-        seller.setBrand_name(sellerDTO.getBrand_name());
-        seller.setSeller_contact(sellerDTO.getSeller_contact());
+        seller.setSellerId(sellerDTO.getSellerId());
+        seller.setSellerPassword(sellerDTO.getSellerPassword());
+        seller.setBrandName(sellerDTO.getBrandName());
+        seller.setSellerContact(sellerDTO.getSellerContact());
 
         return seller;
     }

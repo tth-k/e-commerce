@@ -7,7 +7,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
-import project.ecommerce.dto.UserDTO;
 
 import java.time.LocalDateTime;
 
@@ -24,19 +23,19 @@ public class User {
     private Long id;
 
     @Column(nullable = false, unique = true)
-    private String user_id;
+    private String userId;
 
     @Column(nullable = false)
-    private String user_password;
+    private String userPassword;
 
     @Column
-    private String user_name;
+    private String userName;
 
     @Column
-    private String user_contact;
+    private String userContact;
 
     @Column
-    private String user_address;
+    private String userAddress;
 
     @CreatedDate
     private LocalDateTime createdAt;
@@ -44,15 +43,4 @@ public class User {
     @LastModifiedDate
     private LocalDateTime modifiedAt;
 
-    public static User toUser(UserDTO userDTO){
-        User user = new User();
-
-        user.setUser_id(userDTO.getUser_id());
-        user.setUser_password(userDTO.getUser_password());
-        user.setUser_name(userDTO.getUser_name());
-        user.setUser_contact(userDTO.getUser_contact());
-        user.setUser_address(userDTO.getUser_address());
-
-        return user;
-    }
 }

@@ -1,12 +1,14 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>customerSave</title>
+    <title>sellerJoin</title>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
 </head>
 <body>
 <form action="/seller/join" method="post">
-    아이디: <input type="text" name="sellerId"> <br>
+    아이디: <input type="text" name="sellerId" id = "sellerId" onkeyup="sellerIdCheck()"> <br>
+    <span id="check-result"> </span> <br>
     비밀번호: <input type="password" name="sellerPassword"> <br>
     상호명: <input type="text" name="brandName"> <br>
     연락처: <input type="text" name="sellerContact"> <br>
@@ -14,4 +16,31 @@
     <input type="submit" value="판매사 회원가입">
 </form>
 </body>
+<script th:inline="javascript">
+    const sellerIdCheck = () => {
+        const sellerId = document.getElementById("sellerId").value;
+        const checkResult = document.getElementById("check-result");
+        console.log("입력값: ", sellerId);
+        $.ajax({
+        type: "post",
+        url: "/seller/sellerId-check",
+        data: {
+            "sellerId": sellerId
+        },
+        success: function(result){
+            console.log("요청성공", result);
+            if(result == "ok") {
+                console.log("사용 가능한 아이디입니다.")
+                checkResult.innerHTML = "사용 가능한 아이디입니다."
+            } else {
+                console.log("이미 사용 중인 아이디입니다.");
+                checkResult.innerHTML = "이미 사용 중인 아이디입니다."
+            }
+        },
+        error: function(error){
+                console.log("에러발생", error);
+            }
+        });
+    }
+</script>
 </html>
